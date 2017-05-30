@@ -20,7 +20,7 @@ export class MessageService {
     const token = localStorage.getItem('token')
       ? '?token='+localStorage.getItem('token')
       : '';
-    return this.http.post('https://mean-deployment-em.herokuapp.com/message' + token, body, {headers: headers})
+    return this.http.post('http://mean-deployment-em.herokuapp.com/message' + token, body, {headers: headers})
       .map((response: Response) => {
         const result = response.json();
         const message = new Message(
@@ -38,7 +38,7 @@ export class MessageService {
   }
 
   getMessages() {
-    return this.http.get('https://mean-deployment-em.herokuapp.com/message')
+    return this.http.get('http://mean-deployment-em.herokuapp.com/message')
       .map((response) => {
         const messages = response.json().obj;
         let transformedMessages: Message[] = [];
@@ -70,7 +70,7 @@ export class MessageService {
     const token = localStorage.getItem('token')
       ? '?token=' + localStorage.getItem('token')
       : '';
-    return this.http.patch('https://mean-deployment-em.herokuapp.com/message/'+ message.messageId + token, body, {headers: headers})
+    return this.http.patch('http://mean-deployment-em.herokuapp.com/message/'+ message.messageId + token, body, {headers: headers})
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
@@ -83,7 +83,7 @@ export class MessageService {
     const token = localStorage.getItem('token')
       ? '?token=' + localStorage.getItem('token')
       : '';
-    return this.http.delete('https://mean-deployment-em.herokuapp.com/message/'+ message.messageId + token)
+    return this.http.delete('http://mean-deployment-em.herokuapp.com/message/'+ message.messageId + token)
       .map((response: Response) => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
