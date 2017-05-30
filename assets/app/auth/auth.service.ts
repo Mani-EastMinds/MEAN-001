@@ -7,13 +7,15 @@ import {ErrorService} from "../errors/error.service";
 
 @Injectable()
 export class AuthService {
+    
+    private URL: string = 'http://Sample-env.xpcmvx6jb3.us-east-2.elasticbeanstalk.com/';
 
     constructor(private http: Http, private errorService: ErrorService) {}
 
     signup(user: User) {
       const body = JSON.stringify(user);
       const headers = new Headers({'Content-Type' : 'Application/json'});
-      return this.http.post('http://mean-deployment-em.herokuapp.com/user', body, {headers: headers})
+      return this.http.post(this. URL + 'user', body, {headers: headers})
         .map((response: Response) => response.json())
         .catch((error: Response) => {
         this.errorService.handleError(error.json());
@@ -24,7 +26,7 @@ export class AuthService {
     signin(user: User) {
       const body = JSON.stringify(user);
       const headers = new Headers({'Content-Type' : 'Application/json'});
-      return this.http.post('http://mean-deployment-em.herokuapp.com/user/signin', body, {headers: headers})
+      return this.http.post(this.URL + 'user/signin', body, {headers: headers})
         .map((response: Response) => response.json())
         .catch((error: Response) => {
         this.errorService.handleError(error.json());
